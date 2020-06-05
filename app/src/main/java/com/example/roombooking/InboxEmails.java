@@ -6,8 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,29 +81,40 @@ public class InboxEmails extends AppCompatActivity {
                 Log.d(TAG, "onResponse message : " + response.message());
                 Log.d(TAG, "onResponse raw : " + response.raw());
                 EmailPojo attributes = response.body();
-                List<EmailDetails> list = response.body().getEmailDetail();
+                final List<EmailDetails> list = response.body().getEmailDetail();
                 try {
                     postData(list);
+                    mAdapter.setItemOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+                            int position = viewHolder.getAdapterPosition();
+                            int id = list.get(position).getEmailId();
+                            String emailTitle = list.get(position).getEmailTitle();
+                            String Message = list.get(position).getMessage();
+                            String Time = list.get(position).getDateTime();
+                            String name = list.get(position).getSenderName();
+                            String sendBy = list.get(position).getEmailSendBy();
+
+                            SharedPreferences sharedPref = getSharedPreferences("OpenEmail", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+
+                            editor.putInt("id", id);
+                            editor.putString("emailTitle", emailTitle);
+                            editor.putString("Message", Message);
+                            editor.putString("Time", Time);
+                            editor.putString("name", name);
+                            editor.putString("sendBy", sendBy);
+                            editor.apply();
+                            Intent homeIntent = new Intent(InboxEmails.this, ReadEmail.class);
+                            startActivity(homeIntent);
+                        }
+                    });
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (response.body().getStatus().equals("Success")) {
 
-                    for (int i = 0; i < list.size(); i++) {
-                        int id = list.get(i).getEmailId();
-                        String email = list.get(i).getEmailTitle();
-                        String Message = list.get(i).getMessage();
-                        String Time = list.get(i).getDateTime();
-                        String name = list.get(i).getSenderName();
-                        String sendBy = list.get(i).getEmailSendBy();
-                        System.out.println(id + "\n"
-                                + email + "\n" +
-                                Message + "\n" +
-                                Time + "\n" +
-                                name + "\n" +
-                                sendBy);
-                    }
-                }
                 tvNotification.setVisibility(View.GONE);
             }
 
@@ -126,7 +139,7 @@ public class InboxEmails extends AppCompatActivity {
         recyclerEmail.setAdapter(mAdapter);
 
         Log.d(TAG, "ADAPTER: " + mAdapter.getItemCount());
-        // mAdapter.setOnItemClickListener(onItemClickPoke);
+        //   mAdapter.setItemOnClickListener(mOnClickListener);
 
 
     }

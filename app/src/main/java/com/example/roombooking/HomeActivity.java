@@ -45,19 +45,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         phoneNumber = sharedpref1.getInt("phoneNumber", 0);
         department = sharedpref1.getString("department", "");
 
-
-//        Bundle intent = getIntent().getExtras();
-//        if (intent != null) {
-//            firstName = intent.getString("firstName");
-//            name = intent.getString("lastName");
-//            lastName = intent.getString("username");
-//            password = intent.getString("password");
-//            email = intent.getString("email");
-//            phoneNumber = intent.getInt("phoneNumber", 0);
-//            department = intent.getString("department");
-//        }
-
-
         Log.d(TAG, "Firstname : " + firstName);
         Log.d(TAG, "Email : " + email);
 

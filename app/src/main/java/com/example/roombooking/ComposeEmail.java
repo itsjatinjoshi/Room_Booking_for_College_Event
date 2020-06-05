@@ -98,6 +98,7 @@ public class ComposeEmail extends AppCompatActivity {
     }
 
     private void checkValidations() {
+        //todo: validation on email
         if (etToSend.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please enter sender address", Toast.LENGTH_LONG).show();
         } else if (etSubject.getText().toString().isEmpty()) {

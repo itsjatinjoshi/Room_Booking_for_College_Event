@@ -20,6 +20,12 @@ public class EmailAdapter extends RecyclerView.Adapter<EmailAdapter.ViewHolder> 
     private ArrayList<EmailDetails> mEmailAttributes;
     private Context mContext;
 
+    private View.OnClickListener itemOnClickListener;
+
+    public void setItemOnClickListener(View.OnClickListener itemOnClickListener) {
+        this.itemOnClickListener = itemOnClickListener;
+    }
+
     public EmailAdapter(ArrayList<EmailDetails> emailAttributes, Context context) {
         Log.d(TAG, "EmailAdapter: " +"CHECK POINT 1");
         mEmailAttributes = emailAttributes;
@@ -62,6 +68,9 @@ public class EmailAdapter extends RecyclerView.Adapter<EmailAdapter.ViewHolder> 
             tvSenderLetter = itemView.findViewById(R.id.tvSenderLetter);
             tvSenderName = itemView.findViewById(R.id.tvSenderName);
             tvSubject = itemView.findViewById(R.id.tvSubject);
+
+            itemView.setTag(this);
+            itemView.setOnClickListener(itemOnClickListener);
         }
     }
 
