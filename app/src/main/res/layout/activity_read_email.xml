@@ -7,18 +7,51 @@
     tools:context=".ReadEmail">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_horizontal"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/email_button"
+        android:drawableStart="@drawable/ic_reply"
+        android:drawableLeft="@drawable/ic_reply"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Reply"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/email_button"
+        android:drawableEnd="@drawable/ic_forward"
+        android:drawableRight="@drawable/ic_forward"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Forward  "
+        android:typeface="serif"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnReply"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/email_button"
+        android:text="TextView"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnReply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="#ffffff" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
 
     <TextView
         android:id="@+id/tvSenderName"
@@ -28,9 +61,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="sender name"
-        android:textStyle="bold"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -53,56 +86,35 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="subject"
-        android:textStyle="italic"
-        android:textSize="20sp"
         android:textColor="@color/design_default_color_on_secondary"
-         app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSenderName" />
 
-    <TextView
-        android:id="@+id/tvMessage"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        android:background="@drawable/email_button"
-        android:textColor="@color/design_default_color_on_secondary"
-        app:layout_constraintBottom_toTopOf="@+id/btnReply"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_horizontal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme.actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="#ffffff">
 
-    <Button
-        android:id="@+id/btnReply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Reply"
-        android:padding="5dp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/ic_reply"
-        android:drawableStart="@drawable/ic_reply"
-        android:background="@drawable/email_button"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/ic_delete" />
 
-    <Button
-        android:padding="5dp"
-        android:id="@+id/btnForward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:text="Forward  "
-        android:gravity="center"
-        android:drawableRight="@drawable/ic_forward"
-        android:drawableEnd="@drawable/ic_forward"
-        android:background="@drawable/email_button"
-        android:typeface="serif"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnReply"
-        app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.appcompat.widget.Toolbar>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

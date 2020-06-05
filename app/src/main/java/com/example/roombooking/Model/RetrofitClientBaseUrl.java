@@ -1,8 +1,6 @@
 package com.example.roombooking.Model;
 
-import com.example.roombooking.Interface.IEmail;
-import com.example.roombooking.Interface.ILogin;
-import com.example.roombooking.Interface.IRegister;
+import com.example.roombooking.Interface.IAllApiCalls;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,26 +19,36 @@ public class RetrofitClientBaseUrl {
                 .build();
     }
 
-    public static synchronized RetrofitClientBaseUrl getInstance(){
-        if(instance == null){
+    public static synchronized RetrofitClientBaseUrl getInstance() {
+        if (instance == null) {
             instance = new RetrofitClientBaseUrl();
         }
         return instance;
     }
 
-    public IRegister getRegisterUser(){
-        return retrofit.create(IRegister.class);
+    //Register new User
+    public IAllApiCalls getRegisterUser() {
+        return retrofit.create(IAllApiCalls.class);
     }
 
-    public ILogin getUserCredential(){
-        return retrofit.create(ILogin.class);
+    //Login User with credential
+    public IAllApiCalls getUserCredential() {
+        return retrofit.create(IAllApiCalls.class);
     }
 
-    public IEmail sendEmail(){
-        return retrofit.create(IEmail.class);
+
+    // Send Email to another user
+    public IAllApiCalls sendEmail() {
+        return retrofit.create(IAllApiCalls.class);
     }
 
-    public IEmail getEmail(){
-        return retrofit.create(IEmail.class);
+    //Receive Email
+    public IAllApiCalls getEmail() {
+        return retrofit.create(IAllApiCalls.class);
+    }
+
+    //Delete Email
+    public IAllApiCalls deleteEmail() {
+        return retrofit.create(IAllApiCalls.class);
     }
 }
