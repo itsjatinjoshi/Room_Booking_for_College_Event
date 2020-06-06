@@ -54,7 +54,7 @@ public class ComposeEmail extends AppCompatActivity {
         etToSend = findViewById(R.id.etToSend);
         etSubject = findViewById(R.id.etSubject);
         etMessage = findViewById(R.id.etMessage);
-        btnSend = findViewById(R.id.btnSend);
+        btnSend = findViewById(R.id.btnForward);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -51,4 +51,10 @@ public class RetrofitClientBaseUrl {
     public IAllApiCalls deleteEmail() {
         return retrofit.create(IAllApiCalls.class);
     }
+
+    //Update Email with reply back
+    //Delete Email
+    public IAllApiCalls replyEmail() {
+        return retrofit.create(IAllApiCalls.class);
+    }
 }

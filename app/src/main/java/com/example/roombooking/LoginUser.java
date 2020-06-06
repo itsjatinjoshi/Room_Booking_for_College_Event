@@ -16,18 +16,26 @@ import com.example.roombooking.Model.RetrofitClientBaseUrl;
 import com.example.roombooking.Utils.PreferenceUtils;
 import com.example.roombooking.ViewModel.Post.LoginResponse;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.roombooking.RegisterUser.EMAIL_ADDRESS_PATTERN;
 
 public class LoginUser extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginUser";
     TextView tvRegister;
     EditText etEmail, etPassword;
     Button btnLogin;
-
+    private static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

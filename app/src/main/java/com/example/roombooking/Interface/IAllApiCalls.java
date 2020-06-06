@@ -50,4 +50,17 @@ public interface IAllApiCalls {
     Call<EmailPojo> deleteEmail(
             @Path(value = "emailID") int emailID
     );
+
+
+    @GET("UpdatEmailMessage&{title}&{message}&{time}&{name}&{email_send_by}&{email_send_to}&{email_id}")
+    Call<SendEmail> updateEmail(
+            @Path(value = "title") String title,
+            @Path(value = "message") String message,
+            @Path(value = "time") String time,
+            @Path(value = "name") String name,
+            @Path(value = "email_send_by") String senderEmail,
+            @Path(value = "email_send_to") String receiverEmail,
+            @Path(value = "email_id") int emailId
+    );
+
 }

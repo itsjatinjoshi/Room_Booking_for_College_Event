@@ -4,27 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReadEmail">
-
+    tools:context=".ReplyEmail">
 
     <Button
-        android:id="@+id/btnReply"
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/email_button"
-        android:drawableStart="@drawable/ic_reply"
-        android:drawableLeft="@drawable/ic_reply"
+        android:drawableStart="@drawable/ic_close"
+        android:drawableLeft="@drawable/ic_close"
         android:gravity="center"
         android:padding="5dp"
-        android:text="Reply"
+        android:text="Cancel"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnForward"
+        android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
@@ -33,23 +32,24 @@
         android:drawableRight="@drawable/ic_forward"
         android:gravity="center"
         android:padding="5dp"
-        android:text="Forward  "
+        android:text="Send  "
         android:typeface="serif"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnReply"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tvMessage"
+    <EditText
+        android:id="@+id/etMessage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:background="@drawable/email_button"
-        android:text="TextView"
+        android:padding="10dp"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="18sp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnReply"
+        android:text="aaaa"
+        android:gravity="top|start"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
@@ -107,15 +107,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="#ffffff">
 
-        <ImageView
-            android:id="@+id/ivDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_delete" />
+<!--        <ImageView-->
+<!--            android:id="@+id/ivDelete"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="10dp"-->
+<!--            android:layout_gravity="end"-->
+<!--            app:srcCompat="@drawable/ic_delete" />-->
 
     </androidx.appcompat.widget.Toolbar>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ public class RegisterUser extends AppCompatActivity {
     int id;
     long phone;
     String fname, lname, username, password, email, department;
-    public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
+    private static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                     "\\@" +
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
@@ -50,7 +50,7 @@ public class RegisterUser extends AppCompatActivity {
         facilityId = findViewById(R.id.facilityId);
         etFirstName = findViewById(R.id.etFirstName);
         etLastName = findViewById(R.id.etLastName);
-        etUsername = findViewById(R.id.etEmail);
+        etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
@@ -117,8 +117,8 @@ public class RegisterUser extends AppCompatActivity {
             Toast.makeText(this, "Enter the Username", Toast.LENGTH_SHORT).show();
         } else if (etEmail.getText().toString().isEmpty()) {
             Toast.makeText(this, "Enter the Email", Toast.LENGTH_SHORT).show();
-        } else if (!EMAIL_ADDRESS_PATTERN.matcher(etEmail.getText().toString()).matches()) {
-            Toast.makeText(this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
+        } else if (!etEmail.getText().toString().matches(String.valueOf(EMAIL_ADDRESS_PATTERN))) {
+            Toast.makeText(this, "Enter Valid Email Address", Toast.LENGTH_SHORT).show();
         } else if (etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "Enter the Password", Toast.LENGTH_SHORT).show();
         } else if (etPassword.getText().toString().length() < 8) {

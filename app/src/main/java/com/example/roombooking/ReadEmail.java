@@ -19,8 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roombooking.Model.RetrofitClientBaseUrl;
-import com.example.roombooking.Utils.PreferenceUtils;
-import com.example.roombooking.ViewModel.Get.EmailDetails;
 import com.example.roombooking.ViewModel.Get.EmailPojo;
 
 import retrofit2.Call;
@@ -98,11 +96,33 @@ public class ReadEmail extends AppCompatActivity {
     }
 
     private void replyToSender() {
+        SharedPreferences sharedPref = getSharedPreferences("replyEmail", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
+        editor.putInt("id", id);
+        editor.putString("emailTitle", emailTitle);
+        String messageModified = Message + " \n"
+                + "===========" + " \n";
+        editor.putString("Message", messageModified);
+        editor.putString("Time", Time);
+        editor.putString("name", name);
+        editor.putString("sendBy", sendBy);
+        editor.apply();
+        Intent homeIntent = new Intent(ReadEmail.this, ReplyEmail.class);
+        startActivity(homeIntent);
     }
 
     private void forwardToNewUser() {
+        SharedPreferences sharedPref = getSharedPreferences("forwardEmail", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
+        editor.putString("emailTitle", emailTitle);
+        String messageModified = Message + " \n"
+                + "===========" + " \n";
+        editor.putString("Message", messageModified);
+        editor.apply();
+        Intent homeIntent = new Intent(ReadEmail.this, ForwardEmail.class);
+        startActivity(homeIntent);
     }
 
     private void deleteEmail() {

@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReplyOrForwardEmail"></activity>
+        <activity android:name=".ForwardEmail"></activity>
+        <activity android:name=".ReplyEmail" />
         <activity android:name=".ReadEmail" />
         <activity android:name=".InboxEmails" />
         <activity android:name=".ComposeEmail" />
