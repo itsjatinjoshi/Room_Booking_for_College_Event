@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NewRoomBooking"></activity>
+        <activity android:name=".PendingRequestDetails"></activity>
+        <activity android:name=".PendingBookingRequests" />
+        <activity android:name=".NewRoomBooking" />
         <activity android:name=".ForwardEmail" />
         <activity android:name=".ReplyEmail" />
         <activity android:name=".ReadEmail" />

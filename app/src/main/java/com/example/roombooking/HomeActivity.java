@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.roombooking.Utils.PreferenceUtils;
-import com.example.roombooking.ui.gallery.GalleryFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -125,9 +124,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Log.d("HOME_ACTIVITY", "INBOX APPROVED");
 
         } else if (id == R.id.nav_pending) {
-            System.out.println("ID for Order : " + id);
-//            Intent orderStatus = new Intent(HomeActivity.this, OrderStatus.class);
-//            startActivity(orderStatus);
+            SharedPreferences sharedPref = getSharedPreferences("pendingRequests", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("id", facilityId);
+            editor.putString("firstName", firstName);
+            editor.putString("lastName", lastName);
+            editor.apply();
+            Intent newRoomBooking = new Intent(HomeActivity.this, PendingBookingRequests.class);
+            startActivity(newRoomBooking);
             Log.d("HOME_ACTIVITY", "PENDING");
 
         } else if (id == R.id.nav_available) {

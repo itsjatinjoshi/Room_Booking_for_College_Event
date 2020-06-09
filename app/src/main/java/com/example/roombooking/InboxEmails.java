@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +19,7 @@ import com.example.roombooking.Model.RetrofitClientBaseUrl;
 import com.example.roombooking.ViewModel.Get.EmailDetails;
 import com.example.roombooking.ViewModel.Get.EmailPojo;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

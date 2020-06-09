@@ -30,6 +30,8 @@ import android.widget.Toast;
 import com.example.roombooking.Model.RetrofitClientBaseUrl;
 import com.example.roombooking.Utils.PreferenceUtils;
 import com.example.roombooking.ViewModel.Post.LoginResponse;
+import com.example.roombooking.ViewModel.Post.RoomBookingRequest;
+import com.example.roombooking.ViewModel.Post.SendEmail;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -97,7 +99,7 @@ public class NewRoomBooking extends AppCompatActivity {
 
         pgBar.setVisibility(View.GONE);
         tvMessage.setVisibility(View.GONE);
-
+        // fullName = firstName + " " + lastName;
         tvFacilityName.setText(firstName + " " + lastName);
         ArrayAdapter<String> departmentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, roomOptions);
         departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -171,10 +173,12 @@ public class NewRoomBooking extends AppCompatActivity {
         btnSendQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                compareTime();
+
                 checkValidations();
             }
         });
+
+        clearFields(false);
     }
 
 
@@ -232,10 +236,9 @@ public class NewRoomBooking extends AppCompatActivity {
             Toast.makeText(this, "Enter Starting Time", Toast.LENGTH_SHORT).show();
         } else if (etTimeUpto.getText().toString().isEmpty()) {
             Toast.makeText(this, "Enter Finish Time", Toast.LENGTH_SHORT).show();
-        }
-        else if(compareTime()){
+        } else if (compareTime()) {
             Toast.makeText(this, "Staring time not to be greater thn end time", Toast.LENGTH_LONG).show();
-        }else if (etPurpose.getText().toString().isEmpty()) {
+        } else if (etPurpose.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please specify the reason", Toast.LENGTH_SHORT).show();
         } else {
             allowToFacility();
@@ -273,21 +276,21 @@ public class NewRoomBooking extends AppCompatActivity {
 
     private boolean compareTime() {
         Log.d(TAG, "TIME CALLING ...");
-        Log.d(TAG, "TIME CHECK..."+ etTimeFrom.getText().toString());
+        Log.d(TAG, "TIME CHECK..." + etTimeFrom.getText().toString());
         try {
-            Log.d(TAG, "TRY CALLING... " );
+            Log.d(TAG, "TRY CALLING... ");
 
             String str = "08:03:10 pm";
             DateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
-            Date startTime = (Date)formatter.parse(etTimeFrom.getText().toString());
-            Date endTime = (Date)formatter.parse(etTimeUpto.getText().toString());
+            Date startTime = (Date) formatter.parse(etTimeFrom.getText().toString());
+            Date endTime = (Date) formatter.parse(etTimeUpto.getText().toString());
 
 
-            Log.d(TAG, "START TIME: "+ startTime);
+            Log.d(TAG, "START TIME: " + startTime);
             Log.d(TAG, "END TIME: " + endTime);
 
             if (startTime.before(endTime)) {
-              //  Toast.makeText(this, "Staring time not to be greater thn end time", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(this, "Staring time not to be greater thn end time", Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -298,9 +301,76 @@ public class NewRoomBooking extends AppCompatActivity {
     }
 
     private void allowToFacility() {
+        String fullName = firstName + " " + lastName;
+        String roomType = spinnerRoomType.getSelectedItem().toString();
+        String equip = etAllEquipment.getText().toString().trim();
+        String gathering = etPersons.getText().toString().trim();
+        String date = etDate.getText().toString();
+        String reason = etPurpose.getText().toString().trim();
+        String extraNotes = etExtraNotes.getText().toString().trim();
+        String startTime = etTimeFrom.getText().toString().trim();
+        String endTime = etTimeUpto.getText().toString().trim();
+
+        Log.d(TAG, "DATA FOR DATABASE " + userId +
+                "\n" + fullName+
+                "\n" + roomType+
+                "\n" + equip+
+                "\n" + gathering+
+                "\n" + date+
+                "\n" + reason+
+                "\n" + extraNotes+
+                "\n" + startTime+
+                "\n" + endTime);
+
+        Call<RoomBookingRequest> call = RetrofitClientBaseUrl.getInstance().roomBooking().sendRoomBookingRequest(userId,
+                fullName,roomType,equip, gathering, date, reason, extraNotes, startTime, endTime  );
+
+        call.enqueue(new Callback<RoomBookingRequest>() {
+            @Override
+            public void onResponse(Call<RoomBookingRequest> call, Response<RoomBookingRequest> response) {
+                if (response.body().getStatus().equals("Success")) {
+                    Toast.makeText(NewRoomBooking.this, "Request Send Successfully", Toast.LENGTH_LONG).show();
+                    clearFields(true);
+
+                    Log.d(TAG, "RESPONSE " + response.message());
+                    Log.d(TAG, "RESPONSE SUCCESSFUL: " + response.isSuccessful());
+                } else if (response.body().getStatus().equals("Request Failed")) {
+                    Log.d(TAG, "Retrofit JSON NOT MATCHED : ");
+                    Toast.makeText(NewRoomBooking.this, "Sending Failed", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(NewRoomBooking.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomBookingRequest> call, Throwable t) {
+                Toast.makeText(NewRoomBooking.this, "Request Send Failure", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+
         Log.d(TAG, "ALL GOOD");
         Toast.makeText(this, "ALL GOOD", Toast.LENGTH_SHORT).show();
     }
 
+        private void clearFields(boolean isSuccessful) {
+            Log.d(TAG, "clearFields: Called");
+            if (isSuccessful) {
+                etAllEquipment.setText("");
+                etPurpose.setText("");
+                etPersons.setText("");
+                etDate.setText("");
+                etTimeFrom.setText("");
+                etTimeUpto.setText("");
+                etExtraNotes.setText("");
+                spinnerRoomType.setSelection(0);
+            } else {
+                Log.d(TAG, "NOT CLEARED ");
+            }
+    }
+
 
 }
+//todo: will change allEquipment from edit text to textview, and use cardview for textview with close vector assests, so user can remove .
+//todo: need to modified etEquipment so can concatenate all the equipment using string

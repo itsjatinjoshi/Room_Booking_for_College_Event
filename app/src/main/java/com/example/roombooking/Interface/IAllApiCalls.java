@@ -1,8 +1,10 @@
 package com.example.roombooking.Interface;
 
 import com.example.roombooking.ViewModel.Get.EmailPojo;
+import com.example.roombooking.ViewModel.Get.SendRequestPojo;
 import com.example.roombooking.ViewModel.Post.LoginResponse;
 import com.example.roombooking.ViewModel.Post.RegisterNewUser;
+import com.example.roombooking.ViewModel.Post.RoomBookingRequest;
 import com.example.roombooking.ViewModel.Post.SendEmail;
 
 import retrofit2.Call;
@@ -63,4 +65,22 @@ public interface IAllApiCalls {
             @Path(value = "email_id") int emailId
     );
 
+    @GET("RegisterForRoomBooking&{facility_id}&{facility_name}&{room_type}&{equipments}&{gathering}&{date}&{reason}&{extra_notes}&{start_time}&{end_time}")
+    Call<RoomBookingRequest> sendRoomBookingRequest(
+            @Path(value = "facility_id") int facility_id,
+            @Path(value = "facility_name") String facility_name,
+            @Path(value = "room_type") String room_type,
+            @Path(value = "equipments") String equipments,
+            @Path(value = "gathering") String gathering,
+            @Path(value = "date") String date,
+            @Path(value = "reason") String reason,
+            @Path(value = "extra_notes") String extra_notes,
+            @Path(value = "start_time") String start_time,
+            @Path(value = "end_time") String end_time
+    );
+
+    @GET("SendBookingRequest&{facility_id}")
+    Call<SendRequestPojo> pendingRequests(
+            @Path(value = "facility_id") int facilityId
+    );
 }

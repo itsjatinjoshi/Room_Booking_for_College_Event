@@ -57,4 +57,12 @@ public class RetrofitClientBaseUrl {
     public IAllApiCalls replyEmail() {
         return retrofit.create(IAllApiCalls.class);
     }
+
+    public IAllApiCalls roomBooking() {
+        return retrofit.create(IAllApiCalls.class);
+    }
+
+    public IAllApiCalls requestsSend() {
+        return retrofit.create(IAllApiCalls.class);
+    }
 }
