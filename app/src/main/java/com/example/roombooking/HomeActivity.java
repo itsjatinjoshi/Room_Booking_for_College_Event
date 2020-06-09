@@ -25,8 +25,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public int OpenDraw, closeDraw;
     FloatingActionButton fab;
     private static final String TAG = "HomeActivity";
-    String firstName, name, lastName, password, email, department;
-    int phoneNumber;
+    String firstName, lastName, username, password, email, department;
+    int phoneNumber, facilityId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         SharedPreferences sharedpref1 = getApplication().getSharedPreferences("userName", MODE_PRIVATE);
+        facilityId = sharedpref1.getInt("id",0);
         firstName = sharedpref1.getString("firstName", ""); //
-        name = sharedpref1.getString("firstName", "");
-        lastName = sharedpref1.getString("username", "");
+        lastName = sharedpref1.getString("lastName", "");
+        username = sharedpref1.getString("username", "");
         password = sharedpref1.getString("password", "");
         email = sharedpref1.getString("email", "");
         phoneNumber = sharedpref1.getInt("phoneNumber", 0);
@@ -130,10 +131,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Log.d("HOME_ACTIVITY", "PENDING");
 
         } else if (id == R.id.nav_available) {
-            System.out.println("ID for Order : " + id);
-//            Intent orderStatus = new Intent(HomeActivity.this, OrderStatus.class);
-//            startActivity(orderStatus);
-            Log.d("HOME_ACTIVITY", "AVAILABLE");
+            SharedPreferences sharedPref = getSharedPreferences("bookRoomForActivity", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("id", facilityId);
+            editor.putString("firstName", firstName);
+            editor.putString("lastName", lastName);
+            editor.apply();
+            Intent newRoomBooking = new Intent(HomeActivity.this, NewRoomBooking.class);
+            startActivity(newRoomBooking);
+            Log.d("HOME_ACTIVITY", "New Room Booking");
 
         } else if (id == R.id.nav_setting) {
             System.out.println("ID for Order : " + id);

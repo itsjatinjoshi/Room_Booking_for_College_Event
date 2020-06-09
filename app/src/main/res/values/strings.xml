@@ -19,5 +19,5 @@
     <string name="menu_inbox">Inbox</string>
 
     <string name="menu_pending">Pending Requests</string>
-    <string name="menu_available">Available Rooms</string>
+    <string name="menu_available">New Room Booking</string>
 </resources>

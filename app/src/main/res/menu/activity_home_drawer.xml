@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_inbox"
             android:title="@string/menu_inbox" />
         <item
+            android:id="@+id/nav_available"
+            android:icon="@drawable/ic_available"
+            android:title="@string/menu_available" />
+        <item
             android:id="@+id/nav_approved"
             android:icon="@drawable/ic_approve"
             android:title="@string/menu_approved" />
@@ -21,10 +25,7 @@
             android:id="@+id/nav_pending"
             android:icon="@drawable/ic_pending"
             android:title="@string/menu_pending" />
-        <item
-            android:id="@+id/nav_available"
-            android:icon="@drawable/ic_available"
-            android:title="@string/menu_available" />
+
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings"
